@@ -5,15 +5,11 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        name: "nuxt js"
-      }
-    }
-  }
+export default {
+  data() {
+    return {
+      name: "nuxt js",
+    };
+  },
+};
 </script>
-
-<style>
-
-</style>
