@@ -79,6 +79,11 @@ export default {
           title: '글쓰기',
           to: '/createBoard'
         },
+        {
+          icon: 'mdi-store-check',
+          title: '카테고리',
+          to: '/category'
+        }
       ],
       miniVariant: false,
       right: true,

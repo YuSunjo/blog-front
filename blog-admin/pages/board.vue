@@ -6,12 +6,10 @@
             v-model="selected"
             class="mb-4"
             active-class="primary--text"
-            multiple
             @change="changeSelected"
         >
           <v-chip key="ALL" large filter>전체</v-chip>
-          <!--          <v-chip v-for="(item,i) in retrieveCategory" :key="(Object.keys(BroadcastState))[i]" large filter>{{item.text}}</v-chip>-->
-          <v-chip v-for="(item,i) in retrieveCategory" :key="(Object.keys(BroadcastState))[i]" large filter>
+          <v-chip v-for="(item,i) in retrieveCategory" :key="i" large filter>
             {{ item.categoryName }}
           </v-chip>
         </v-chip-group>
@@ -32,7 +30,7 @@ export default {
   components: {BoardCard},
   data() {
     return {
-      selected: 0,
+      selected: [0],
       retrieveCategory: [
         {
           'id': 1,
@@ -51,7 +49,9 @@ export default {
   },
   methods: {
     changeSelected() {
+      if (this.selected[0] === 0) {
 
+      }
     }
   }
 
