@@ -1,6 +1,5 @@
 <template>
   <v-app>
-    <LoadingDialog :dialog="true" />
     <v-navigation-drawer
         v-model="drawer"
         :mini-variant="miniVariant"
@@ -51,9 +50,7 @@
 </template>
 
 <script>
-import LoadingDialog from '../component/loading/LoadingDialog.vue'
 export default {
-  components: { LoadingDialog },
   data () {
     return {
       clipped: false,
