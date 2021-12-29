@@ -5,12 +5,12 @@
       single-line
       transition="slide-y-transition"
     >
-      No Internet connection
+      {{data.categoryName}}
       <template>
         <v-btn
           text
           color="primary"
-          @click="updateCategory"
+          @click="updateCategoryToggle"
         >
           수정
         </v-btn>
@@ -23,6 +23,18 @@
         </v-btn>
       </template>
     </v-banner>
+    <v-card v-if='updateToggle === true'>
+      <v-container>
+        <v-form @submit.prevent='updateCategory'>
+          <v-text-field
+            required
+          />
+          <v-btn color='green' type='submit'>
+            변경
+          </v-btn>
+        </v-form>
+      </v-container>
+    </v-card>
   </div>
 </template>
 
@@ -30,8 +42,19 @@
 export default {
   data: () => ({
     v0: true,
+    valid: false,
+    updateToggle: false,
   }),
+  props: {
+    data: {
+      type: Object,
+    }
+  },
   methods: {
+    updateCategoryToggle() {
+      console.log("updateCategoryToggle");
+      this.updateToggle = !this.updateToggle;
+    },
     updateCategory() {
       console.log("updateCategory")
     },

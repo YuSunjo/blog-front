@@ -7,4 +7,7 @@ module.exports = {
   },
   modules: ["@nuxtjs/vuetify", "@nuxtjs/axios"],
   vuetify: {},
+  axios: {
+    baseURL: "http://localhost:9000",
+  },
 };
