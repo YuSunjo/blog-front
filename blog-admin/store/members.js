@@ -1,9 +1,9 @@
 export const state = () => ({
-    hello: 'vuex'
-})
+  myInfo: null,
+});
 
 export const mutations = {
-    hello(state) {
-        state.hello = "hello world"
-    }
-}
+  hello(state) {
+    state.hello = "hello world";
+  },
+};
