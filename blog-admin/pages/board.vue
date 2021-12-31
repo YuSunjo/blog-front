@@ -6,7 +6,6 @@
             v-model="selected"
             class="mb-4"
             active-class="primary--text"
-            @change="changeSelected"
         >
           <v-chip key="ALL" large filter>전체</v-chip>
           <v-chip v-for="(item,i) in retrieveCategory" :key="i" large filter>
@@ -30,7 +29,7 @@ export default {
   components: {BoardCard},
   data() {
     return {
-      selected: [0],
+      selected: true,
       retrieveCategory: [
         {
           'id': 1,
@@ -48,11 +47,6 @@ export default {
     }
   },
   methods: {
-    changeSelected() {
-      if (this.selected[0] === 0) {
-
-      }
-    }
   }
 
 };
