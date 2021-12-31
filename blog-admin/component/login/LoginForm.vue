@@ -2,7 +2,7 @@
   <div>
     <v-container>
       <v-card>
-        <v-form>
+        <v-form ref='form' v-model='valid' @submit.p.prevent='onSubmitForm'>
           <v-container>
             <v-text-field
               v-model='email'
@@ -18,7 +18,9 @@
               type="password"
               required
             />
-            <v-btn color="blue">로그인</v-btn>
+            <v-btn color="blue" type='submit' :disabled='!valid'>
+              로그인
+            </v-btn>
           </v-container>
         </v-form>
       </v-card>
@@ -44,7 +46,25 @@ export default {
   },
   computed: {
     myInfo() {
-      return this.$store.state.users.myInfo
+      return this.$store.state.members.myInfo
+    }
+  },
+  methods: {
+    onSubmitForm() {
+      if (this.$refs.form.validate()) {
+        this.$store.dispatch('members/login', {
+          email: this.email,
+          password: this.password,
+        })
+        .then(() => {
+          this.$router.push({
+            path: '/',
+          });
+        })
+        .catch(() => {
+          alert("아이디 또는 비밀번호가 맞지 않습니다");
+        })
+      }
     }
   }
 }
