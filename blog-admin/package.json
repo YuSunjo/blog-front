@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@blowstack/ckeditor-nuxt": "^0.6.0",
+    "@nuxtjs/auth": "^4.9.1",
     "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/vuetify": "^1.12.3",
     "axios": "^0.24.0",

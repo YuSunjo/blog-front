@@ -3,15 +3,18 @@ module.exports = {
     fix: true,
   },
   head: {
-    title: "blog",
+    title: 'blog',
   },
   modules: [
-    "@nuxtjs/vuetify",
-    "@nuxtjs/axios",
-    ["cookie-universal-nuxt", { alias: "cookiz" }],
+    '@nuxtjs/vuetify',
+    '@nuxtjs/axios',
+    'cookie-universal-nuxt',
   ],
   vuetify: {},
   axios: {
-    baseURL: "http://localhost:9000",
+    baseURL: 'http://localhost:9000',
+  },
+  router: {
+    middleware: 'authenticated'
   },
 };
