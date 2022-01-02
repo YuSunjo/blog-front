@@ -1,35 +1,56 @@
 export const state = () => ({
-  hello: "vuex",
-  categoryList: [
-    {
-      id: 1,
-      categoryName: "category1",
-    },
-    {
-      id: 2,
-      categoryName: "category2",
-    },
-    {
-      id: 3,
-      categoryName: "category3",
-    },
-  ],
+  categoryList: [],
 });
 
 export const mutations = {
-  hello(state) {
-    state.hello = "hello world";
-  },
   retrieveCategory(state, payload) {
-    state.categoryList.push(payload);
+    state.categoryList = payload;
   },
+  createCategory(state, payload) {
+    state.categoryList.unshift(payload)
+  },
+  updateCategory(state, payload) {
+    let index = state.categoryList.findIndex(v => v.id === payload.id);
+    state.categoryList[index].categoryName = payload.categoryName
+  }
 };
 
 export const actions = {
-  async retrieveCategory({ commit }, payload) {
-    let response = await this.$axios.get("/api/v1/admin/category/list");
-    console.log("response" + response);
-    console.log("payload" + payload);
-    commit("retrieveCategory", payload);
+  async retrieveCategory({ commit }) {
+    let response = await this.$axios.get("/api/v1/admin/category/list", {
+      headers: {
+        Authorization: this.$cookies.get("token")
+      }
+    });
+    console.log(response.data.data)
+    commit("retrieveCategory", response.data.data);
   },
+  async createCategory({commit}, payload) {
+    try {
+      let response = await this.$axios.post("/api/v1/admin/category", payload, {
+        headers: {
+          Authorization: this.$cookies.get("token")
+        }
+      });
+      commit("createCategory", response.data.data)
+    } catch (e) {
+      console.log(this.error);
+      alert('생성하는데 실패했습니다.');
+    }
+  },
+  async updateCategory({commit}, payload) {
+    try {
+      let response = await this.$axios.put("/api/v1/admin/category", payload, {
+        headers: {
+          Authorization: this.$cookies.get("token")
+        }
+      });
+      commit("updateCategory", response.data.data);
+    } catch (e) {
+      alert('업데이트 실패');
+    }
+  },
+  // async deleteCategory({commit}, payload) {
+  //
+  // }
 };

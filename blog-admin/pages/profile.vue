@@ -1,6 +1,6 @@
 <template>
   <div>
-    profile
+    profile 및 전체 설정 페이지
   </div>
 </template>
 

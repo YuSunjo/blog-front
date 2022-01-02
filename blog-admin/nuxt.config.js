@@ -12,6 +12,7 @@ module.exports = {
   ],
   vuetify: {},
   axios: {
+    browserBaseURL: 'http://localhost:9000',
     baseURL: 'http://localhost:9000',
   },
   router: {

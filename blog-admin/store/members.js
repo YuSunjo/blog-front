@@ -23,18 +23,19 @@ export const actions = {
         Authorization: this.$cookies.get("token"),
       },
     });
-    console.log(myResponse);
     commit("setMyInfo", myResponse.data.data);
     // await dispatch("getMyInfo");
   },
   async getMyInfo({ commit }) {
-    console.log(this.$cookies.get("token"));
-    let response = await this.$axios.get("api/v1/admin/member", {
-      headers: {
-        Authorization: this.$cookies.get("token")
-      },
-    });
-    console.log(response);
-    commit("setMyInfo", response.data.data);
+    try {
+      let response = await this.$axios.get("api/v1/admin/member", {
+        headers: {
+          Authorization: this.$cookies.get("token")
+        },
+      });
+      commit("setMyInfo", response.data.data);
+    } catch (e) {
+      await this.$router.push('/login')
+    }
   },
 };

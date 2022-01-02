@@ -1,5 +1,6 @@
 export const state = () => ({
-    hello: 'vuex'
+    hello: 'vuex',
+    errorMessage: '',
 })
 
 export const mutations = {
@@ -10,7 +11,6 @@ export const mutations = {
 
 export const actions = {
     nuxtServerInit({commit, dispatch, state}, { req }) {
-        console.log("이거 실행되는거냐")
         return dispatch('members/getMyInfo');
     }
 }
