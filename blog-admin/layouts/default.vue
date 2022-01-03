@@ -80,7 +80,7 @@ export default {
           icon: 'mdi-store-check',
           title: '카테고리',
           to: '/category'
-        }
+        },
       ],
       miniVariant: false,
       right: true,

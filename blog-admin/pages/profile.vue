@@ -1,12 +1,26 @@
 <template>
   <div>
-    profile 및 전체 설정 페이지
+    <profile />
+    <config />
   </div>
 </template>
 
 <script>
-export default {
+import Profile from '../component/profile/profile';
+import Config from '../component/config/config';
 
+export default {
+  components: {Profile, Config},
+  computed: {
+    myInfo() {
+      return this.$store.state.members.myInfo;
+    }
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch('members/logout')
+    }
+  }
 };
 </script>
 

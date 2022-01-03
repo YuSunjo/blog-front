@@ -9,6 +9,9 @@ export const mutations = {
   setMyInfo(state, payload) {
     state.myInfo = payload;
   },
+  deleteMyInfo(state) {
+    state.myInfo = null;
+  }
 };
 
 export const actions = {
@@ -38,4 +41,13 @@ export const actions = {
       await this.$router.push('/login')
     }
   },
+  async logout({commit}) {
+    try {
+      this.$cookies.remove("token");
+      commit("deleteMyInfo");
+      await this.$router.push("/login");
+    } catch (e) {
+      console.log(e);
+    }
+  }
 };
