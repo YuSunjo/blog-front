@@ -56,7 +56,7 @@ export default {
       console.log(e.target.files);
       const imageFormData = new FormData();
       [].forEach.call(e.target.files, (f) => {
-        imageFormData.append("file", f);
+        imageFormData.append("upload", f);
       });
       this.$store.dispatch("utils/uploadImage", imageFormData);
     },
