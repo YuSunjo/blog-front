@@ -11,6 +11,9 @@ import Config from '../component/config/config';
 
 export default {
   components: {Profile, Config},
+  fetch({store}) {
+    store.dispatch('getConfig');
+  },
   computed: {
     myInfo() {
       return this.$store.state.members.myInfo;
