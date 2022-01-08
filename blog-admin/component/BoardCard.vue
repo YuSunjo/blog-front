@@ -3,13 +3,17 @@
     <v-card>
       <v-container>
         <v-img />
-        <v-card-title>
+        <v-card-title v-if="board.title.length < 10">
           {{board.title}}
         </v-card-title>
-        <v-card-text>
-          <div>
-            <div>{{ board.content }}</div>
-          </div>
+        <v-card-title v-else>
+          {{cutTitle}}
+        </v-card-title>
+        <v-card-text v-if="board.title.length < 20">
+          <div>{{ board.content }}</div>
+        </v-card-text>
+        <v-card-text v-else>
+          <div>{{ cutContent }}</div>
         </v-card-text>
         <v-card-actions>
           <v-btn text color='primary' :to="`/board/${board.id}`">
@@ -25,13 +29,13 @@
       </v-container>
     </v-card>
     <v-container v-if='commentToggle'>
-      <CommentCard />
+      <CommentCard :board="board"/>
     </v-container>
   </v-container>
 </template>
 
 <script>
-import CommentCard from "@/component/CommentCard";
+import CommentCard from "./CommentCard";
 export default {
   components: {CommentCard},
   props: {
@@ -41,7 +45,9 @@ export default {
   },
   data() {
     return {
-      commentToggle: false
+      commentToggle: false,
+      cutTitle: this.board.title.substr(0, 10),
+      cutContent: this.board.content.substr(0, 20),
     }
   },
   methods: {

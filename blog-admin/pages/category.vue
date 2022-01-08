@@ -5,7 +5,6 @@
       <v-btn @click="toggleChange">
         생성
       </v-btn>
-
       <v-container>
         <v-card v-if='createToggle === true'>
           <v-container>
@@ -31,6 +30,7 @@
 
 <script>
 import CategoryCard from "../component/CategoryCard";
+// import { mapState } from 'vuex';
 export default {
   components: { CategoryCard },
   fetch({store}) {
@@ -45,7 +45,8 @@ export default {
   computed: {
     categoryList() {
       return this.$store.state.categorys.categoryList;
-    }
+    },
+    // ...mapState('categorys', ['categoryList']),
   },
   methods: {
     createCategory() {
