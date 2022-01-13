@@ -25,6 +25,9 @@
           <v-btn text color="primary" @click='deleteBoard'>
             <v-icon color="orange">mdi-delete</v-icon>
           </v-btn>
+          <v-btn text color='primary' :to="`/updateBoard/${board.id}`">
+            <v-icon color='orange'>mdi-update</v-icon>
+          </v-btn>
         </v-card-actions>
       </v-container>
     </v-card>
