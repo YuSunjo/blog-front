@@ -58,7 +58,7 @@ export default {
     return {
       editorConfig: {
         simpleUpload: {
-          uploadUrl: "http://localhost:9000/image/upload",
+          uploadUrl: 'http://115.71.238.146:9000/image/upload',
         },
       },
       contentHolder: "",

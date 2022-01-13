@@ -24,8 +24,8 @@
 import BoardCard from "../../component/BoardCard";
 
 export default {
-  fetch({ store }) {
-    store.dispatch("boards/retrieveBoard");
+  async fetch({ store }) {
+    await store.dispatch("boards/retrieveBoard");
     return store.dispatch("categorys/retrieveCategory");
   },
   components: { BoardCard },
