@@ -10,10 +10,10 @@
           {{cutTitle}}
         </v-card-title>
         <v-card-text v-if="board.title.length < 20">
-          <div>{{ board.content }}</div>
+          <div v-html='board.content'></div>
         </v-card-text>
         <v-card-text v-else>
-          <div>{{ cutContent }}</div>
+          <div v-html='cutContent'></div>
         </v-card-text>
         <v-card-actions>
           <v-btn text color='primary' :to="`/board/${board.id}`">
@@ -46,8 +46,16 @@ export default {
   data() {
     return {
       commentToggle: false,
-      cutTitle: this.board.title.substr(0, 10),
-      cutContent: this.board.content.substr(0, 20),
+      // cutTitle: this.board.title.substr(0, 10),
+      // cutContent: this.board.content.substr(0, 20),
+    }
+  },
+  computed: {
+    cutTitle() {
+      return this.board.title.substr(0, 10)
+    },
+    cutContent() {
+      return this.board.content.substr(0, 10)
     }
   },
   methods: {
