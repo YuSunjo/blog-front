@@ -61,14 +61,24 @@
     </v-card>
     <v-main>
       <v-container>
-        <nuxt />
+        <v-row>
+          <v-col cols="12" xs="12" md="3">
+            <profile />
+          </v-col>
+          <v-col cols="12" xs="12" md="9">
+            <nuxt />
+          </v-col>
+        </v-row>
       </v-container>
     </v-main>
   </div>
 </template>
 
 <script>
+import Profile from '../components/profile';
+
 export default {
+  components: {Profile},
   data: () => ({
     items: [
       { title: 'myPage' },
