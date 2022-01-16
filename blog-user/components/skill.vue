@@ -2,6 +2,7 @@
   <div>
     <v-container>
       skills
+      <image-slider />
     </v-container>
     <v-container>
       <v-row>
@@ -90,8 +91,9 @@
 
 <script>
 import SkillCard from './skillCard';
+import ImageSlider from './imageSlider';
 export default {
-  components: {SkillCard},
+  components: {ImageSlider, SkillCard},
   data() {
     return {
       titleList: [
