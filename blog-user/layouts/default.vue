@@ -19,46 +19,17 @@
         <v-toolbar-title :style="{fontsize: 12}">home</v-toolbar-title>
 
         <v-spacer></v-spacer>
-        <v-menu
-            bottom
-            left
-        >
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn
-                icon
-                color="yellow"
-                v-bind="attrs"
-                v-on="on"
-            >
-              <v-icon>mdi-dots-vertical</v-icon>
-            </v-btn>
-          </template>
-
-          <v-list>
-            <v-list-item
-                v-for="(item, i) in items"
-                :key="i"
-            >
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
-            </v-list-item>
-          </v-list>
-        </v-menu>
-
         <template v-slot:extension>
-          <v-tabs align-with-title>
-            <v-tab @click="updateMyInfoToggle">myInfo</v-tab>
-          </v-tabs>
+          <v-btn @click="updateMyInfoToggle">
+            INFO
+          </v-btn>
         </template>
       </v-app-bar>
-<!--      <v-sheet-->
-<!--          id="scrolling-techniques-4"-->
-<!--          class="overflow-y-auto"-->
-<!--          max-height="600"-->
-<!--          v-if="myInfoToggle"-->
-<!--      >-->
-<!--        <v-container style="height: 1000px;"></v-container>-->
-<!--      </v-sheet>-->
     </v-card>
+    <div v-if="myInfoToggle">
+      <h1 v-if="myInfo == null">myInfo가 없다면</h1>
+      <h1 v-else>myInfo가 있다면</h1>
+    </div>
     <v-main>
       <v-container>
         <v-row>
@@ -79,15 +50,19 @@ import Profile from '../components/profile';
 
 export default {
   components: {Profile},
-  data: () => ({
-    items: [
-      { title: 'myPage' },
-    ],
-    // myInfoToggle: false,
-  }),
+  data() {
+    return {
+      myInfoToggle: true,
+    }
+  },
+  computed: {
+    myInfo() {
+      return this.$store.state.members.myInfo;
+    }
+  },
   methods: {
     updateMyInfoToggle: () => {
-      // this.myInfoToggle = !this.myInfoToggle;
+      this.myInfoToggle = !this.myInfoToggle;
     }
   }
 }
