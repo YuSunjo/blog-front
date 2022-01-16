@@ -1,17 +1,17 @@
 <template>
   <span>
-    <img height="10%" width="10%" :src="this.images[this.currentNumber]"/>
+    <img alt="image" height="10%" width="10%" :src="this.images[this.currentNumber]"/>
   </span>
 </template>
 
 <script>
 export default {
-  // created() {
-  //   this.startRotation();
-  // },
-  // destroyed() {
-  //   clearInterval(this.timer)
-  // },
+  created() {
+    this.startRotation();
+  },
+  destroyed() {
+    clearInterval(this.timer)
+  },
   data() {
     return {
       images: [
@@ -24,16 +24,16 @@ export default {
       timer: null,
     }
   },
-  // methods: {
-  //   startRotation: () => {
-  //     this.time = setInterval(() => {
-  //       if (data.images.length - 1 === this.currentNumber) {
-  //         this.currentNumber = -1
-  //       }
-  //       this.currentNumber += 1
-  //     }, 3000);
-  //   },
-  // }
+  methods: {
+    startRotation() {
+      this.timer = setInterval(() => {
+        if (this.images.length - 1 === this.currentNumber) {
+          this.currentNumber = -1
+        }
+        this.currentNumber += 1
+      }, 3000);
+    },
+  }
 }
 </script>
 

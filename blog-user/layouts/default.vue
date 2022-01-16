@@ -27,7 +27,10 @@
       </v-app-bar>
     </v-card>
     <div v-if="myInfoToggle">
-      <h1 v-if="myInfo == null">myInfo가 없다면</h1>
+      <div v-if="myInfo == null">
+        <login-form>
+        </login-form>
+      </div>
       <h1 v-else>myInfo가 있다면</h1>
     </div>
     <v-main>
@@ -47,12 +50,13 @@
 
 <script>
 import Profile from '../components/profile';
+import LoginForm from '../components/loginForm'
 
 export default {
-  components: {Profile},
+  components: {Profile, LoginForm},
   data() {
     return {
-      myInfoToggle: true,
+      myInfoToggle: false,
     }
   },
   computed: {
@@ -61,7 +65,7 @@ export default {
     }
   },
   methods: {
-    updateMyInfoToggle: () => {
+    updateMyInfoToggle() {
       this.myInfoToggle = !this.myInfoToggle;
     }
   }

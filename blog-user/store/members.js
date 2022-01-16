@@ -21,4 +21,26 @@ export const actions = {
       console.log(e);
     }
   },
+  async login({commit}, payload) {
+    try {
+      let response = await this.$axios.post("/api/v1/member/login", payload);
+      this.$cookies.set("token", response.data.data)
+      let myResponse = await this.$axios.get("api/v1/member", {
+        headers: {
+          Authorization: this.$cookies.get("token"),
+        },
+      });
+      commit("setMyInfo", myResponse.data.data);
+    } catch (e) {
+      console.log(e)
+    }
+  },
+  async signUp(payload) {
+    try {
+      await this.$axios.post("/api/v1/member", payload);
+      await this.$router.push("/");
+    } catch (e) {
+      console.log(e)
+    }
+  }
 };
