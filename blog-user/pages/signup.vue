@@ -51,6 +51,9 @@
 
 <script>
 export default {
+  created() {
+    this.myInfoToggle = false
+  },
   data() {
     return {
       valid: false,
@@ -75,12 +78,22 @@ export default {
       ],
     }
   },
+  computed: {
+    myInfoToggle: {
+      get: function() {
+        return this.$store.state.myInfoToggle;
+      },
+      set: function (newValue) {
+        this.$store.dispatch('updateMyInfoToggle', newValue)
+      }
+    }
+  },
   methods: {
     onSubmitForm() {
       if (this.$refs.form.validate()) {
         this.$store.dispatch('members/signUp', {
-          nickname: this.nickname,
           email: this.email,
+          password: this.password,
           provider: "LOCAL"
         })
             .then(() => {
@@ -88,7 +101,9 @@ export default {
                 path: '/',
               });
             })
-            .catch(() => {
+            .catch((e) => {
+              console.log('sdf')
+              console.log(e.response.data)
               alert("회원가입 실패");
             });
       }
