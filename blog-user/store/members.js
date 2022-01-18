@@ -38,7 +38,6 @@ export const actions = {
   async signUp(payload) {
     try {
       await this.$axios.post("/api/v1/member", payload);
-      await this.$router.push("/");
     } catch (e) {
       console.log(e)
     }

@@ -50,7 +50,7 @@ export default {
   computed: {
     myInfo() {
       return this.$store.state.members.myInfo
-    }
+    },
   },
   methods: {
     onSubmitForm() {

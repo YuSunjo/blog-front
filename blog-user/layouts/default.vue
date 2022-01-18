@@ -20,7 +20,7 @@
 
         <v-spacer></v-spacer>
         <template v-slot:extension>
-          <v-btn @click="updateMyInfoToggle">
+          <v-btn @click="updateMyInfoToggle(myInfoToggle)">
             INFO
           </v-btn>
         </template>
@@ -56,17 +56,24 @@ export default {
   components: {Profile, LoginForm},
   data() {
     return {
-      myInfoToggle: false,
     }
   },
   computed: {
     myInfo() {
       return this.$store.state.members.myInfo;
+    },
+    myInfoToggle: {
+      get: function() {
+        return this.$store.state.myInfoToggle;
+      },
+      set: function (newValue) {
+        this.$store.dispatch('updateMyInfoToggle', newValue)
+      }
     }
   },
   methods: {
-    updateMyInfoToggle() {
-      this.myInfoToggle = !this.myInfoToggle;
+    updateMyInfoToggle(toggle) {
+      this.myInfoToggle = !toggle
     }
   }
 }
