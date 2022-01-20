@@ -31,7 +31,9 @@
         <login-form>
         </login-form>
       </div>
-      <h1 v-else>myInfo가 있다면</h1>
+      <h1 v-else>
+        <my-info />
+      </h1>
     </div>
     <v-main>
       <v-container>
@@ -51,9 +53,10 @@
 <script>
 import Profile from '../components/profile';
 import LoginForm from '../components/loginForm'
+import MyInfo from "../components/MyInfo";
 
 export default {
-  components: {Profile, LoginForm},
+  components: {MyInfo, Profile, LoginForm},
   data() {
     return {
     }
