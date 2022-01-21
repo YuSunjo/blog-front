@@ -6,7 +6,14 @@
 
 <script>
 export default {
-
+  fetch({store, params}) {
+    return store.dispatch('boards/getBoard', params.id)
+  },
+  computed: {
+    board() {
+      return this.$store.state.boards.board;
+    }
+  }
 }
 </script>
 

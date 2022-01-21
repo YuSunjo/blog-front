@@ -35,7 +35,7 @@ export const actions = {
       console.log(e)
     }
   },
-  async signUp(payload) {
+  async signUp({commit}, payload) {
     try {
       await this.$axios.post("/api/v1/member", payload);
     } catch (e) {

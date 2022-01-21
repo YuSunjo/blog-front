@@ -94,7 +94,8 @@ export default {
         this.$store.dispatch('members/signUp', {
           email: this.email,
           password: this.password,
-          provider: "LOCAL"
+          provider: "LOCAL",
+          nickname: this.nickname,
         })
             .then(() => {
               this.$router.push({

@@ -1,4 +1,7 @@
 module.exports = {
+  server: {
+    port: 3030
+  },
   eslint: {
     fix: true,
   },
