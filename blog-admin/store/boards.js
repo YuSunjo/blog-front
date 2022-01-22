@@ -18,7 +18,7 @@ export const actions = {
   async createBoard({ commit }, payload) {
     await this.$axios.post("/api/v1/board", payload, {
       headers: {
-        Authorization: this.$cookies.get("token"),
+        Authorization: this.$cookies.get("admin_token"),
       },
     });
     await this.$router.push("/board");
@@ -26,7 +26,7 @@ export const actions = {
   async retrieveBoard({ commit }) {
     let response = await this.$axios.get("/api/v1/board/list?page=1&size=5", {
       headers: {
-        Authorization: this.$cookies.get("token"),
+        Authorization: this.$cookies.get("admin_token"),
       },
     });
     commit("retrieveBoard", response.data.data);
@@ -34,7 +34,7 @@ export const actions = {
   async getBoard({ commit }, boardId) {
     let response = await this.$axios.get(`/api/v1/board/${boardId}`, {
       headers: {
-        Authorization: this.$cookies.get("token"),
+        Authorization: this.$cookies.get("admin_token"),
       },
     });
     commit("getBoard", response.data.data);

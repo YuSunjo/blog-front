@@ -20,10 +20,10 @@ export const actions = {
       email: payload.email,
       password: payload.password,
     });
-    this.$cookies.set("token", response.data.data)
+    this.$cookies.set("admin_token", response.data.data)
     let myResponse = await this.$axios.get("api/v1/admin/member", {
       headers: {
-        Authorization: this.$cookies.get("token"),
+        Authorization: this.$cookies.get("admin_token"),
       },
     });
     commit("setMyInfo", myResponse.data.data);
@@ -33,7 +33,7 @@ export const actions = {
     try {
       let response = await this.$axios.get("api/v1/admin/member", {
         headers: {
-          Authorization: this.$cookies.get("token")
+          Authorization: this.$cookies.get("admin_token")
         },
       });
       commit("setMyInfo", response.data.data);

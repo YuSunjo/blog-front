@@ -16,19 +16,11 @@ export const mutations = {
 
 export const actions = {
   async retrieveBoard({ commit }) {
-    let response = await this.$axios.get("/api/v1/board/list?page=1&size=5", {
-      headers: {
-        Authorization: this.$cookies.get("token"),
-      },
-    });
+    let response = await this.$axios.get("/api/v1/board/list?page=1&size=5");
     commit("retrieveBoard", response.data.data);
   },
   async getBoard({ commit }, boardId) {
-    let response = await this.$axios.get(`/api/v1/board/${boardId}`, {
-      headers: {
-        Authorization: this.$cookies.get("token"),
-      },
-    });
+    let response = await this.$axios.get(`/api/v1/board/${boardId}`);
     commit("getBoard", response.data.data);
   },
 };

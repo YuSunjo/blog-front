@@ -18,6 +18,11 @@
             닉네임
           </v-card-text>
         </v-card>
+        <v-container>
+          <v-btn>
+            로그아웃
+          </v-btn>
+        </v-container>
       </v-col>
     </v-row>
   </v-container>

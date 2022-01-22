@@ -14,7 +14,7 @@
       <v-card-actions>
         <v-btn
             color="orange lighten-2"
-            tex
+            text
             :to="`/blog/${board.id}`"
         >
           Explore

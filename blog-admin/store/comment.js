@@ -12,7 +12,7 @@ export const actions = {
   async retrieveComment({ commit }, boardId) {
     let response = await this.$axios.get(`/api/v1/admin/comment/${boardId}`, {
       headers: {
-        Authorization: this.$cookies.get("token")
+        Authorization: this.$cookies.get("admin_token")
       }
     });
     console.log(response.data.data)

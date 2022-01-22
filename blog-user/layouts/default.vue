@@ -36,7 +36,6 @@
       </h1>
     </div>
     <v-main>
-      <v-container>
         <v-row>
           <v-col cols="12" xs="12" md="3">
             <profile />
@@ -45,7 +44,6 @@
             <nuxt />
           </v-col>
         </v-row>
-      </v-container>
     </v-main>
   </div>
 </template>

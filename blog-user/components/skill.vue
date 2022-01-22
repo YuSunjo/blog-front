@@ -66,7 +66,7 @@
               개인 프로젝트
             </v-card-title>
             <v-card-text>
-              <v-btn>
+              <v-btn text>
                 상세보기
               </v-btn>
             </v-card-text>
@@ -78,7 +78,7 @@
               그룹 프로젝트
             </v-card-title>
             <v-card-text>
-              <v-btn>
+              <v-btn text>
                 상세보기
               </v-btn>
             </v-card-text>
