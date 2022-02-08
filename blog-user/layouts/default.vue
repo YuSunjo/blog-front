@@ -16,7 +16,7 @@
               gradient="to top right, rgba(100,115,201,.7), rgba(25,32,72,.7)"
           ></v-img>
         </template>
-        <v-toolbar-title :style="{fontsize: 12}">home</v-toolbar-title>
+        <v-toolbar-title :style="{fontsize: 12}"><nuxt-link to="/" class="nuxt-link">home</nuxt-link></v-toolbar-title>
 
         <v-spacer></v-spacer>
         <template v-slot:extension>
@@ -81,5 +81,8 @@ export default {
 </script>
 
 <style scoped>
-
+.nuxt-link{
+  text-decoration-line: none;
+  color: inherit;
+}
 </style>

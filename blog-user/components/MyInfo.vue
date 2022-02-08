@@ -19,7 +19,7 @@
           </v-card-text>
         </v-card>
         <v-container>
-          <v-btn>
+          <v-btn @click="onClickLogOut">
             로그아웃
           </v-btn>
         </v-container>
@@ -33,6 +33,11 @@ export default {
   computed: {
     myInfo() {
       return this.$store.state.members.myInfo;
+    }
+  },
+  methods: {
+    async onClickLogOut() {
+      await this.$store.dispatch("members/logout")
     }
   }
 }

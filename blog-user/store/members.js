@@ -6,6 +6,9 @@ export const mutations = {
   setMyInfo(state, payload) {
     state.myInfo = payload;
   },
+  deleteMyInfo(state) {
+    state.myInfo = null;
+  }
 };
 
 export const actions = {
@@ -32,7 +35,7 @@ export const actions = {
       });
       commit("setMyInfo", myResponse.data.data);
     } catch (e) {
-      console.log(e)
+      alert("이메일 또는 비밀번호가 맞지 않습니다.");
     }
   },
   async signUp({commit}, payload) {
@@ -40,6 +43,15 @@ export const actions = {
       await this.$axios.post("/api/v1/member", payload);
     } catch (e) {
       console.log(e)
+    }
+  },
+  async logout({commit}) {
+    try {
+      this.$cookies.remove("token");
+      commit("deleteMyInfo");
+      await this.$router.push("/");
+    } catch (e) {
+      console.log(e);
     }
   }
 };
