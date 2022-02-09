@@ -33,14 +33,21 @@
       </v-icon>
     </v-container>
     <v-container>
-      <v-chip>JAVA</v-chip>
+      <v-chip v-for="(item, i) in hashTagList" :key="i">{{item}}</v-chip>
     </v-container>
   </div>
 </template>
 
 <script>
 export default {
-
+  fetch({store}) {
+    return store.dispatch('boards/retrieveHashTag');
+  },
+  computed: {
+    hashTagList() {
+      return this.$store.state.boards.hashTagList;
+    }
+  }
 }
 </script>
 
