@@ -33,7 +33,7 @@
       </v-form>
     </v-container>
     <v-container>
-      <comment-card v-for="(item, i) in sample" :key="i" :comment="item">
+      <comment-card v-for="(item, i) in commentList" :key="i" :comment="item">
       </comment-card>
     </v-container>
   </v-container>
@@ -44,63 +44,20 @@ import CommentCard from '../../components/CommentCard';
 export default {
   components: {CommentCard},
   fetch({store, params}) {
+    store.dispatch("comment/retrieveComment", params.id)
     return store.dispatch('boards/getBoard', params.id)
   },
   data() {
     return {
       content: "",
-      sample: [
-        {
-          "childCommentList": [
-            null
-          ],
-          "commentId": 0,
-          "content": "string",
-          "memberInfoResponse": {
-            "email": "string",
-            "id": 0,
-            "memberImage": "string",
-            "nickname": "string",
-            "provider": "KAKAO",
-            "role": "ADMIN"
-          }
-        },
-        {
-          "childCommentList": [
-            null
-          ],
-          "commentId": 0,
-          "content": "string",
-          "memberInfoResponse": {
-            "email": "string",
-            "id": 0,
-            "memberImage": "string",
-            "nickname": "string",
-            "provider": "KAKAO",
-            "role": "ADMIN"
-          }
-        },
-        {
-          "childCommentList": [
-            null
-          ],
-          "commentId": 0,
-          "content": "string",
-          "memberInfoResponse": {
-            "email": "string",
-            "id": 0,
-            "memberImage": "string",
-            "nickname": "string",
-            "provider": "KAKAO",
-            "role": "ADMIN"
-          }
-        }
-      ]
     }
   },
   computed: {
     board() {
       return this.$store.state.boards.board;
+    },
+    commentList() {
+      return this.$store.state.comment.commentList;
     }
   },
   methods: {

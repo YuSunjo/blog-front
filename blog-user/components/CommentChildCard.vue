@@ -9,7 +9,7 @@
         </v-avatar>
       </v-col>
       <v-col cols="24" xs="24" md="23">
-        {{comment.memberInfoResponse.nickname}}
+        {{childComment.memberInfoResponse.nickname}}
       </v-col>
     </v-row>
     <v-row>
@@ -17,24 +17,18 @@
       </v-col>
       <v-col cols="24" xs="24" md="23">
         <div>
-          {{comment.content}}
+          {{childComment.content}}
         </div>
       </v-col>
     </v-row>
-    <v-container>
-      <comment-child-card v-for="(item, i) in comment.childCommentList" :key="i" :childComment="item">
-      </comment-child-card>
-    </v-container>
   </v-container>
 </template>
 
 
 <script>
-import CommentChildCard from './CommentChildCard';
 export default {
-  components: {CommentChildCard},
   props: {
-    comment: {
+    childComment: {
       childCommentList: {
         type: Array
       },
