@@ -4,7 +4,7 @@
     <hr class="pt-10"/>
     <v-container>
       <v-btn nuxt to="/blog">
-        더 많은 블로그를 보고 싶어요~
+        더 많은 추억을 보고 싶어요~
       </v-btn>
     </v-container>
     <v-row>
