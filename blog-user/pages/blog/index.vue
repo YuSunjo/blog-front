@@ -5,6 +5,13 @@
         <board-card :board="item" />
       </v-col>
     </v-row>
+    <v-container>
+      <v-pagination
+          v-model="page"
+          :length="6"
+          @input="paginationRetrieveBoard(page)"
+      />
+    </v-container>
   </v-container>
 </template>
 
@@ -14,13 +21,31 @@ import BoardCard from '../../components/BoardCard';
 export default {
   components: {BoardCard},
   fetch({store}) {
-    return store.dispatch('boards/retrieveBoard');
+    return store.dispatch('boards/retrieveBoard', {
+      page: 1,
+      size: 8,
+    });
   },
   computed: {
     boardList() {
       return this.$store.state.boards.boardList;
     }
   },
+  data() {
+    return {
+      page: 1,
+      size: 8,
+    }
+  },
+  methods: {
+    paginationRetrieveBoard(page) {
+      console.log("sd")
+      this.$store.dispatch('boards/retrieveBoard', {
+        page: page,
+        size: 8
+      })
+    }
+  }
 }
 </script>
 

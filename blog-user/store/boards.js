@@ -19,8 +19,8 @@ export const mutations = {
 };
 
 export const actions = {
-  async retrieveBoard({ commit }) {
-    let response = await this.$axios.get("/api/v1/board/list?page=1&size=5");
+  async retrieveBoard({ commit }, payload) {
+    let response = await this.$axios.get(`/api/v1/board/list?page=${payload.page}&size=${payload.size}`);
     commit("retrieveBoard", response.data.data);
   },
   async getBoard({ commit }, boardId) {
