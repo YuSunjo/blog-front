@@ -11,9 +11,11 @@
             <v-card-title>
               {{item}}
             </v-card-title>
-            <v-btn>
-              둘러보기
-            </v-btn>
+            <v-container>
+              <v-btn>
+                둘러보기
+              </v-btn>
+            </v-container>
           </v-card>
         </v-col>
       </v-row>
