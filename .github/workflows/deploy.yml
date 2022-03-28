@@ -22,6 +22,7 @@ jobs:
           branch: $GITHUB_REF
           dontuseforce: true
           appdir: blog-admin
+          procfile: "npm start"
 
       - name: Deploy_USRE
         uses: AkhileshNS/heroku-deploy@v3.12.12
@@ -32,3 +33,4 @@ jobs:
           branch: $GITHUB_REF
           dontuseforce: true
           appdir: blog-user
+          procfile: "npm start"
