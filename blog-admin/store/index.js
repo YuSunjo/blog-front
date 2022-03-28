@@ -1,13 +1,8 @@
 export const state = () => ({
-  hello: "vuex",
-  errorMessage: "",
   backgroundImage: "",
 });
 
 export const mutations = {
-  hello(state) {
-    state.hello = "hello world";
-  },
   getConfig(state, payload) {
     state.backgroundImage = payload?.backgroundImage;
   },

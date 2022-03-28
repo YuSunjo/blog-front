@@ -10,6 +10,12 @@
     >
       <v-list-item three-line>
         <v-list-item-content>
+          <div>
+            <img v-if="myInfo.memberImage == null" src="https://potato-velog-sunjo.s3.ap-northeast-2.amazonaws.com/USER/20210808183424400cat.jpg"
+              width="40%" height="40%"
+            >
+            <img v-else :src="myInfo.memberImage">
+          </div>
           <div class="text-overline mb-4">
             {{myInfo.email}}
           </div>
@@ -20,7 +26,7 @@
             size="80"
             color="white"
         >
-          <v-icon v-if="myInfo.adminImage == null">
+          <v-icon v-if="myInfo.memberImage == null">
             mid-account
           </v-icon>
         </v-list-item-avatar>

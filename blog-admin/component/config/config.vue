@@ -10,7 +10,7 @@
     <v-btn @click='onClickImageUpload' type='button'>
       이미지 업로드
     </v-btn>
-    <div v-if="backgroundImage == null || backgroundImage === ''">
+    <v-container v-if="backgroundImage == null || backgroundImage === ''">
       <div v-if="uploadImage !== '' || uploadImage != null">
         <v-img
           max-height='250'
@@ -23,8 +23,8 @@
           </v-btn>
         </v-container>
       </div>
-    </div>
-    <div v-else>
+    </v-container>
+    <v-container v-else>
       <v-img
         lazy-src='https://picsum.photos/id/11/10/6'
         max-height='250'
@@ -34,7 +34,7 @@
       <v-btn @click='updateConfig'>
         수정
       </v-btn>
-    </div>
+    </v-container>
 
 
   </div>
@@ -42,11 +42,20 @@
 
 <script>
 export default {
+  async fetch({store}) {
+    return await store.dispatch('getConfig')
+  },
   data() {
     return {
-      backgroundImage: this.$store.state.backgroundImage,
-      uploadImage: this.$store.state.utils.uploadImage,
     };
+  },
+  computed: {
+    uploadImage() {
+      return this.$store.state.utils.uploadImage;
+    },
+    backgroundImage() {
+      return this.$store.state.backgroundImage;
+    },
   },
   methods: {
     onClickImageUpload() {
