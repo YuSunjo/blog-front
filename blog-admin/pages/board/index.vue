@@ -34,7 +34,7 @@ import BoardCard from '../../component/BoardCard';
 export default {
   async fetch({store, query}) {
     query.page = query.page == null ? 1 : query.page;
-    query.size = query.size == null ? 1 : query.size;
+    query.size = query.size == null ? 5 : query.size;
     query.category = query.category == null ? null : query.category
 
     this.page = parseInt(query?.page) || 1;
@@ -63,14 +63,14 @@ export default {
     async onClickCategory(categoryName) {
       await this.$store.dispatch('boards/retrieveBoard', {
         page: 1,
-        size: 1,
+        size: 5,
         category: categoryName
       })
     },
     async onClickCategoryAll() {
       await this.$store.dispatch('boards/retrieveBoard', {
         page: 1,
-        size: 1
+        size: 5
       })
     }
   },
