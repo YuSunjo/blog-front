@@ -3,41 +3,84 @@
     <v-container>
       <div>
         <v-chip-group
-          v-model='selected'
-          class='mb-4'
-          active-class='primary--text'
+            v-model='selected'
+            class='mb-4'
+            active-class='primary--text'
         >
-          <v-chip key='ALL' large filter :value='0'>전체</v-chip>
-          <v-chip v-for='(item,i) in retrieveCategory' :value='item.id' :key='i' large filter>
+          <v-chip key='ALL' large filter value='ALL' @click="onClickCategoryAll" >전체</v-chip>
+          <v-chip v-for='(item,i) in retrieveCategory' :value='item.categoryName' :key='i' large filter
+                  @click="onClickCategory(item.categoryName)">
             {{ item.categoryName }}
           </v-chip>
         </v-chip-group>
       </div>
       <div>
-        <board-card nuxt :to="`/board/${item.id}`" v-for='(item, i) in boardList' :key='i' :board='item'></board-card>
+        <board-card nuxt :to="`/board/${board.id}`" v-for='(board, i) in boardList' :key='i'
+                    :board='board'></board-card>
       </div>
+      <v-pagination
+          v-model='page'
+          class='mt-8'
+          :length='boardTotalPage'
+          :total-visible='7'
+      ></v-pagination>
     </v-container>
   </div>
 </template>
 
 <script>
-import BoardCard from "../../component/BoardCard";
+import BoardCard from '../../component/BoardCard';
 
 export default {
-  async fetch({ store }) {
-    await store.dispatch("boards/retrieveBoard");
-    return store.dispatch("categorys/retrieveCategory");
+  async fetch({store, query}) {
+    query.page = query.page == null ? 1 : query.page;
+    query.size = query.size == null ? 1 : query.size;
+    query.category = query.category == null ? null : query.category
+
+    this.page = parseInt(query?.page) || 1;
+    await store.dispatch('boards/retrieveBoard', query);
+    return await store.dispatch('categorys/retrieveCategory');
   },
-  components: { BoardCard },
+  components: {BoardCard},
   data() {
     return {
       selected: true,
-      retrieveCategory: this.$store.state.categorys.categoryList,
-      boardList: this.$store.state.boards.boardList,
+      page: 1,
     };
   },
-  methods: {},
-
+  computed: {
+    retrieveCategory() {
+      return this.$store.state.categorys.categoryList;
+    },
+    boardList() {
+      return this.$store.state.boards.boardList;
+    },
+    boardTotalPage() {
+      return this.$store.state.boards.boardTotalPage;
+    }
+  },
+  methods: {
+    async onClickCategory(categoryName) {
+      await this.$store.dispatch('boards/retrieveBoard', {
+        page: 1,
+        size: 1,
+        category: categoryName
+      })
+    },
+    async onClickCategoryAll() {
+      await this.$store.dispatch('boards/retrieveBoard', {
+        page: 1,
+        size: 1
+      })
+    }
+  },
+  watch: {
+    page(newValue, oldValue) {
+      if (oldValue)
+        this.$router.push({ query: { ...this.$route.query, page: newValue } })
+    }
+  },
+  watchQuery: true
 };
 </script>
 

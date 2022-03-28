@@ -23,8 +23,8 @@ export const actions = {
     });
     await this.$router.push("/board");
   },
-  async retrieveBoard({ commit }) {
-    let response = await this.$axios.get("/api/v1/board/list?page=1&size=5", {
+  async retrieveBoard({ commit }, payload) {
+    let response = await this.$axios.get(`/api/v1/board/list?page=${payload.page}&size=${payload.size}${payload.category == null ? '' : `&category=${payload.category}`}`, {
       headers: {
         Authorization: this.$cookies.get("admin_token"),
       },

@@ -9,7 +9,7 @@
         <v-card-title v-else>
           {{cutTitle}}
         </v-card-title>
-        <v-card-text v-if="board.title.length < 20">
+        <v-card-text v-if="board.content.length < 20">
           <div v-html='board.content'></div>
         </v-card-text>
         <v-card-text v-else>
@@ -58,7 +58,7 @@ export default {
       return this.board.title.substr(0, 10)
     },
     cutContent() {
-      return this.board.content.substr(0, 10)
+      return this.board.content.substr(0, 20)
     }
   },
   methods: {
