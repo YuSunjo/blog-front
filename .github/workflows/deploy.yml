@@ -1,6 +1,5 @@
 name: CI
 
-# Controls when the workflow will run
 on:
   push:
     branches: [ develop, master ]
@@ -22,7 +21,6 @@ jobs:
           branch: $GITHUB_REF
           dontuseforce: true
           appdir: blog-admin
-          procfile: "web: npm start"
 
       - name: Deploy_USRE
         uses: AkhileshNS/heroku-deploy@v3.12.12
@@ -33,4 +31,3 @@ jobs:
           branch: $GITHUB_REF
           dontuseforce: true
           appdir: blog-user
-          procfile: "web: npm start"
