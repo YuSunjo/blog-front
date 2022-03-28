@@ -2,11 +2,6 @@ module.exports = {
   server: {
     port: 3030
   },
-  build: {
-    babel: {
-      plugins: [['transform-remove-console']],
-    }
-  },
   eslint: {
     fix: true,
   },

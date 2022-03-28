@@ -2,11 +2,6 @@ module.exports = {
   eslint: {
     fix: true,
   },
-  build: {
-    babel: {
-      plugins: [['transform-remove-console']],
-    }
-  },
   head: {
     title: "blog",
     meta: [{ name: "referrer", content: "no-referrer" }],
