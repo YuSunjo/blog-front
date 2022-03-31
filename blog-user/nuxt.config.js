@@ -1,4 +1,6 @@
 
+require('dotenv').config({ path: `.env.${process.env.NODE_ENV}` })
+
 export default {
   eslint: {
     fix: true,
@@ -19,4 +21,8 @@ export default {
     baseURL: "http://115.71.238.146:8080",
   },
   ssr: false,
+  env: {
+    GOOGLE_API_KEY: process.env.GOOGLE_API_KEY,
+    REDIRECT_URI: process.env.REDIRECT_URI
+  }
 }

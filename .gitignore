@@ -5,4 +5,5 @@ package-lock.json
 
 **/dist/**
 
-blog-user/.env.develop
+blog-user/.env.development
+**/.env.**

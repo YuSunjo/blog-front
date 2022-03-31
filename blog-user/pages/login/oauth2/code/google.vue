@@ -1,12 +1,6 @@
 <template>
   <v-container>
-    {{this.$route.query.code}}
-    <v-container>
-      {{code}}
-      <v-btn text @click="onClickGoogleLogin">
-        sadf
-      </v-btn>
-    </v-container>
+    로그인중!~
   </v-container>
 </template>
 
@@ -25,22 +19,9 @@ export default {
     console.log(store)
     store.dispatch('members/google', {
       code: query.code,
-      redirectUri: 'http://localhost:3000/login/oauth2/code/google'
+      redirectUri: process.env.REDIRECT_URI
     })
   },
-  data() {
-    return {
-      code: this.$route.query.code
-    }
-  },
-  methods: {
-    onClickGoogleLogin() {
-      this.$store.dispatch('members/google', {
-        code: this.code,
-        redirectUri: 'http://localhost:3000/login/oauth2/code/google'
-      })
-    }
-  }
 }
 </script>
 

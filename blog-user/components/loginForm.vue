@@ -83,8 +83,8 @@ export default {
     },
     onClickGoogleLogin() {
       return 'https://accounts.google.com/o/oauth2/v2/auth' +
-          `?client_id=725334726540-v1gdp6m4ocdlrgf8i01f1os43sr46oc8.apps.googleusercontent.com` +
-          `&redirect_uri=http://localhost:3000/login/oauth2/code/google` +
+          `?client_id=${process.env.GOOGLE_API_KEY}` +
+          `&redirect_uri=${process.env.REDIRECT_URI}` +
           '&response_type=code' +
           '&scope=openid%20profile%20email'
     }
