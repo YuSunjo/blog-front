@@ -18,12 +18,23 @@
                 type="password"
                 required
             />
-            <v-btn color="blue" type='submit' :disabled='!valid'>
-              로그인
-            </v-btn>
-            <v-btn nuxt to="/signup">
-              회원가입
-            </v-btn>
+            <v-row>
+              <v-col cols="12" xs="12" md="2">
+                <v-btn color="blue" type='submit' :disabled='!valid'>
+                  로그인
+                </v-btn>
+              </v-col>
+              <v-col cols="12" xs="12" md="2">
+                <v-btn nuxt to="/signup">
+                  회원가입
+                </v-btn>
+              </v-col>
+              <v-col cols="12" xs="12" md="8">
+                <v-btn text target='_self' :href="onClickGoogleLogin()">
+                  <v-img contain :src="require(`@/assets/google/google_login_image.png`)" height="40"></v-img>
+                </v-btn>
+              </v-col>
+            </v-row>
           </v-container>
         </v-form>
       </v-card>
@@ -69,6 +80,13 @@ export default {
               alert("아이디 또는 비밀번호가 맞지 않습니다");
             })
       }
+    },
+    onClickGoogleLogin() {
+      return 'https://accounts.google.com/o/oauth2/v2/auth' +
+          `?client_id=725334726540-v1gdp6m4ocdlrgf8i01f1os43sr46oc8.apps.googleusercontent.com` +
+          `&redirect_uri=http://localhost:3000/login/oauth2/code/google` +
+          '&response_type=code' +
+          '&scope=openid%20profile%20email'
     }
   }
 }

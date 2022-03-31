@@ -21,6 +21,7 @@ export const mutations = {
 export const actions = {
   async retrieveBoard({ commit }, payload) {
     let response = await this.$axios.get(`/api/v1/board/list?page=${payload.page}&size=${payload.size}`);
+    console.log(response)
     commit("retrieveBoard", response.data.data);
   },
   async getBoard({ commit }, boardId) {

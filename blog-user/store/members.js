@@ -53,5 +53,21 @@ export const actions = {
     } catch (e) {
       console.log(e);
     }
+  },
+  async google({commit}, payload) {
+    try {
+      const response = await this.$axios.post('auth/google', payload);
+      this.$cookies.set("token", response.data.data)
+      let myResponse = await this.$axios.$get("api/v1/member", {
+        headers: {
+          Authorization: this.$cookies.get("token"),
+        },
+      });
+      commit("setMyInfo", myResponse.data.data);
+      await this.$router.push('/')
+    } catch (e) {
+      alert("로그인 실패")
+      console.log(e);
+    }
   }
 };

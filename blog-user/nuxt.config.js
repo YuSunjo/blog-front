@@ -1,10 +1,14 @@
-module.exports = {
+
+export default {
   eslint: {
     fix: true,
   },
   head: {
     title: "blog",
     meta: [{ name: "referrer", content: "no-referrer" }],
+  },
+  router: {
+    middleware: ['getMyInfo']
   },
   modules: ["@nuxtjs/vuetify", "@nuxtjs/axios", "cookie-universal-nuxt"],
   vuetify: {},
@@ -14,4 +18,5 @@ module.exports = {
     browserBaseURL: "http://115.71.238.146:8080",
     baseURL: "http://115.71.238.146:8080",
   },
-};
+  ssr: false,
+}
