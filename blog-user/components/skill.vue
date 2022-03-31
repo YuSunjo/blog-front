@@ -12,7 +12,7 @@
               {{item}}
             </v-card-title>
             <v-container>
-              <v-btn>
+              <v-btn nuxt :to="'/blog?category=' + item">
                 둘러보기
               </v-btn>
             </v-container>

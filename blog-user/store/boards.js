@@ -20,8 +20,8 @@ export const mutations = {
 
 export const actions = {
   async retrieveBoard({ commit }, payload) {
-    let response = await this.$axios.get(`/api/v1/board/list?page=${payload.page}&size=${payload.size}`);
-    console.log(response)
+    console.log(payload)
+    let response = await this.$axios.get(`/api/v1/board/list?page=${payload.page}&size=${payload.size}${payload.category == null ? '' : `&category=${payload.category}`}`);
     commit("retrieveBoard", response.data.data);
   },
   async getBoard({ commit }, boardId) {

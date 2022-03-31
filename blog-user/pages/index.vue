@@ -22,7 +22,7 @@ import BoardCard from '../components/BoardCard';
 export default {
   components: {BoardCard, Skill},
   fetch({store}) {
-    return store.dispatch('boards/retrieveBoard', {page: 1, size: 10});
+    return store.dispatch('boards/retrieveBoard', {page: 1, size: 8});
   },
   computed: {
     boardList() {

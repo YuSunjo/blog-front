@@ -1,15 +1,31 @@
 <template>
   <v-container>
+    <div>
+      <v-chip-group
+          v-model='selected'
+          class='mb-4'
+          active-class='primary--text'
+      >
+        <v-chip key='ALL' large filter value='ALL' @click="onClickCategoryAll" >전체</v-chip>
+        <v-chip v-for='(item,i) in retrieveCategory' :value='item.categoryName' :key='i' large filter
+                @click="onClickCategory(item.categoryName)">
+          {{ item.categoryName }}
+        </v-chip>
+      </v-chip-group>
+    </div>
     <v-row>
       <v-col cols="12" xs="12" md="3" v-for="(item, i) in boardList" :key="i">
         <board-card :board="item" />
       </v-col>
     </v-row>
     <v-container>
+      <v-container>
+        <v-alert v-if='boardTotalPage === 0' type='error'>표시할 데이터가 존재하지 않습니다.</v-alert>
+      </v-container>
       <v-pagination
           v-model="page"
-          :length="6"
-          @input="paginationRetrieveBoard(page)"
+          :length='boardTotalPage'
+          :total-visible='8'
       />
     </v-container>
   </v-container>
@@ -20,29 +36,46 @@ import BoardCard from '../../components/BoardCard';
 
 export default {
   components: {BoardCard},
-  fetch({store}) {
-    return store.dispatch('boards/retrieveBoard', {
-      page: 1,
-      size: 8,
+  async fetch({store, query}) {
+    query.page = query.page == null ? 1 : query.page;
+    query.size = query.size == null ? 8 : query.size;
+    query.category = query.category == null ? null : query.category
+    await store.dispatch('category/retrieveCategory')
+    return await store.dispatch('boards/retrieveBoard', {
+      page: query.page,
+      size: query.size,
+      category: query.category
     });
   },
   computed: {
     boardList() {
       return this.$store.state.boards.boardList;
+    },
+    boardTotalPage() {
+      return this.$store.state.boards.boardTotalPage;
+    },
+    retrieveCategory( ){
+      return this.$store.state.category.categoryList;
     }
   },
   data() {
     return {
       page: 1,
-      size: 8,
+      selected: true
     }
   },
   methods: {
-    paginationRetrieveBoard(page) {
-      console.log("sd")
-      this.$store.dispatch('boards/retrieveBoard', {
-        page: page,
-        size: 8
+    async onClickCategory(categoryName) {
+      await this.$store.dispatch('boards/retrieveBoard', {
+        page: 1,
+        size: 5,
+        category: categoryName
+      })
+    },
+    async onClickCategoryAll() {
+      await this.$store.dispatch('boards/retrieveBoard', {
+        page: 1,
+        size: 5
       })
     }
   }
