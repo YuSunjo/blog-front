@@ -17,8 +17,8 @@ export default {
   axios: {
     // browserBaseURL: "http://localhost:9000",
     // baseURL: "http://localhost:9000",
-    browserBaseURL: "http://115.71.238.146:8080",
-    baseURL: "http://115.71.238.146:8080",
+    browserBaseURL: "https://api-lovga.site",
+    baseURL: "https://api-lovga.site",
   },
   ssr: false,
   env: {

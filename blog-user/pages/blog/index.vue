@@ -6,7 +6,7 @@
           class='mb-4'
           active-class='primary--text'
       >
-        <v-chip key='ALL' large filter value='ALL' @click="onClickCategoryAll" >전체</v-chip>
+        <v-chip key='ALL' large filter value='ALL' @click="onClickCategoryAll">전체</v-chip>
         <v-chip v-for='(item,i) in retrieveCategory' :value='item.categoryName' :key='i' large filter
                 @click="onClickCategory(item.categoryName)">
           {{ item.categoryName }}
@@ -15,7 +15,7 @@
     </div>
     <v-row>
       <v-col cols="12" xs="12" md="3" v-for="(item, i) in boardList" :key="i">
-        <board-card :board="item" />
+        <board-card :board="item"/>
       </v-col>
     </v-row>
     <v-container>
@@ -54,7 +54,7 @@ export default {
     boardTotalPage() {
       return this.$store.state.boards.boardTotalPage;
     },
-    retrieveCategory( ){
+    retrieveCategory() {
       return this.$store.state.category.categoryList;
     }
   },
