@@ -55,6 +55,7 @@ export default {
     store.dispatch("boards/getBoard", params.id)
     return store.dispatch("categorys/retrieveCategory");
   },
+
   computed: {
     board() {
       return this.$store.state.boards.board;
@@ -67,6 +68,9 @@ export default {
     },
     isPrivate() {
       return this.board.isPrivate
+    },
+    categoryId() {
+      return this.board.categoryId
     }
   },
   data() {
@@ -93,7 +97,7 @@ export default {
       console.log(this.contentHolder);
       this.$store.dispatch("boards/updateBoard", {
         id: this.params.id,
-        title: this.title,
+        title: title,
         content: this.contentHolder,
         isPrivate: this.isPrivate,
         boardThumbnailUrl: null,

@@ -37,6 +37,17 @@ export const actions = {
         Authorization: this.$cookies.get("admin_token"),
       },
     });
+    console.log(response.data.data)
     commit("getBoard", response.data.data);
   },
+  async updateBoard({commit}, payload) {
+    console.log(payload)
+    await this.$axios.put("api/v1/board", {
+      payload
+    }, {
+      headers: {
+        Authorization: this.$cookies.get("admin_token"),
+      }
+    })
+  }
 };

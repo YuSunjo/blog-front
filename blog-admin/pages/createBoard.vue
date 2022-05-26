@@ -6,28 +6,34 @@
       </v-text-field>
     </v-container>
     <v-container>
-      <client-only placeholder='loading...'>
-        <ckeditor-nuxt v-model='contentHolder' :config='editorConfig' />
-      </client-only>
+      <editor />
+    </v-container>
+    <v-container>
+      <v-file-input
+          chips
+          counter
+          truncate-length="15"
+          accept="image/*"
+      />
     </v-container>
     <v-container>
       <v-select
-        :items='isPrivateList'
-        label='공개여부'
-        item-text='content'
-        item-value='value'
-        prepend-icon="mdi-map"
-        v-model='isPrivate'
-        outlined
+          :items='isPrivateList'
+          label='공개여부'
+          item-text='content'
+          item-value='value'
+          prepend-icon="mdi-map"
+          v-model='isPrivate'
+          outlined
       ></v-select>
       <v-select
-        :items='categoryList'
-        label='카테고리'
-        item-text='categoryName'
-        item-value='id'
-        prepend-icon="mdi-map"
-        v-model='categoryId'
-        outlined
+          :items='categoryList'
+          label='카테고리'
+          item-text='categoryName'
+          item-value='id'
+          prepend-icon="mdi-map"
+          v-model='categoryId'
+          outlined
       >
       </v-select>
     </v-container>
@@ -43,15 +49,10 @@
 </template>
 
 <script>
+import Editor from "../component/board/Editor";
 export default {
-  components: {
-    "ckeditor-nuxt": () => {
-      if (process.client) {
-        return import("@blowstack/ckeditor-nuxt");
-      }
-    },
-  },
-  fetch({ store }) {
+  components: {Editor},
+  fetch({store}) {
     return store.dispatch("categorys/retrieveCategory");
   },
   data() {
@@ -66,11 +67,12 @@ export default {
       hashTagList: [],
       isPrivate: false,
       isPrivateList: [
-        { content: "공개안함", value: true },
-        { content: "공개함", value: false }
+        {content: "공개안함", value: true},
+        {content: "공개함", value: false}
       ],
       categoryList: this.$store.state.categorys.categoryList,
-      categoryId: 0
+      categoryId: 0,
+      imageUrlList: []
     };
   },
   methods: {
@@ -85,6 +87,9 @@ export default {
         hashTagList: [],
       });
     },
+    uploadFile() {
+
+    }
   },
 };
 </script>

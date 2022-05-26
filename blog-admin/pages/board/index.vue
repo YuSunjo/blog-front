@@ -1,6 +1,12 @@
 <template>
   <div>
     <v-container>
+      <v-btn @click="updateToggle">게시글 생성</v-btn>
+    </v-container>
+    <v-container v-if="createBoardFormToggle">
+      <board-form />
+    </v-container>
+    <v-container>
       <div>
         <v-chip-group
             v-model='selected'
@@ -30,6 +36,7 @@
 
 <script>
 import BoardCard from '../../component/BoardCard';
+import BoardForm from "../../component/board/BoardForm";
 
 export default {
   async fetch({store, query}) {
@@ -41,11 +48,12 @@ export default {
     await store.dispatch('boards/retrieveBoard', query);
     return await store.dispatch('categorys/retrieveCategory');
   },
-  components: {BoardCard},
+  components: {BoardForm, BoardCard},
   data() {
     return {
       selected: true,
       page: 1,
+      createBoardFormToggle: false
     };
   },
   computed: {
@@ -72,6 +80,9 @@ export default {
         page: 1,
         size: 5
       })
+    },
+    updateToggle() {
+      this.createBoardFormToggle = !this.createBoardFormToggle;
     }
   },
   watch: {
