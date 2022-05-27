@@ -19,7 +19,7 @@ export const actions = {
   async retrieveCategory({ commit }) {
     let response = await this.$axios.get("/api/v1/admin/category/list", {
       headers: {
-        Authorization: this.$cookies.get("admin_token")
+        Authorization: localStorage.getItem("admin_token")
       }
     });
     console.log(response.data.data)
@@ -29,7 +29,7 @@ export const actions = {
     try {
       let response = await this.$axios.post("/api/v1/admin/category", payload, {
         headers: {
-          Authorization: this.$cookies.get("admin_token")
+          Authorization: localStorage.getItem("admin_token")
         }
       });
       commit("createCategory", response.data.data)
@@ -42,7 +42,7 @@ export const actions = {
     try {
       let response = await this.$axios.put("/api/v1/admin/category", payload, {
         headers: {
-          Authorization: this.$cookies.get("admin_token")
+          Authorization: localStorage.getItem("admin_token")
         }
       });
       commit("updateCategory", response.data.data);

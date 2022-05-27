@@ -66,7 +66,7 @@ export default {
       title: '',
       content: '',
       categoryId: '',
-      isPrivate: false,
+      isPrivate: null,
       isPrivateList: [
         {content: "공개안함", value: true},
         {content: "공개함", value: false}
@@ -89,7 +89,7 @@ export default {
             hashTagList: []
           }, {
             headers: {
-              Authorization: this.$cookies.get("admin_token"),
+              Authorization: localStorage.getItem("admin_token"),
             },
           });
           await this.$router.go()

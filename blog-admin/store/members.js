@@ -20,20 +20,19 @@ export const actions = {
       email: payload.email,
       password: payload.password,
     });
-    this.$cookies.set("admin_token", response.data.data)
+    localStorage.setItem("admin_token", response.data.data)
     let myResponse = await this.$axios.get("api/v1/admin/member", {
       headers: {
-        Authorization: this.$cookies.get("admin_token"),
+        Authorization: localStorage.getItem("admin_token"),
       },
     });
     commit("setMyInfo", myResponse.data.data);
-    // await dispatch("getMyInfo");
   },
   async getMyInfo({ commit }) {
     try {
       let response = await this.$axios.get("api/v1/admin/member", {
         headers: {
-          Authorization: this.$cookies.get("admin_token")
+          Authorization: localStorage.getItem("admin_token")
         },
       });
       commit("setMyInfo", response.data.data);
@@ -43,7 +42,7 @@ export const actions = {
   },
   async logout({commit}) {
     try {
-      this.$cookies.remove("token");
+      localStorage.removeItem("admin_token");
       commit("deleteMyInfo");
       await this.$router.push("/login");
     } catch (e) {

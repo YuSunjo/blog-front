@@ -21,4 +21,5 @@ module.exports = {
   router: {
     middleware: "authenticated",
   },
+  ssr: false
 };
