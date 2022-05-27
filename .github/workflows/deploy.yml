@@ -18,7 +18,7 @@ jobs:
           heroku_api_key: ${{Secrets.HEROKU_API_KEY}}
           heroku_email: ${{Secrets.HEROKU_EMAIL}}
           heroku_app_name: ${{Secrets.HEROKU_APP_NAME_ADMIN}}
-          branch: $GITHUB_REF
+          branch: develop
           dontuseforce: true
           appdir: blog-admin
 
@@ -28,6 +28,6 @@ jobs:
           heroku_api_key: ${{Secrets.HEROKU_API_KEY}}
           heroku_email: ${{Secrets.HEROKU_EMAIL}}
           heroku_app_name: ${{Secrets.HEROKU_APP_NAME_USER}}
-          branch: $GITHUB_REF
+          branch: develop
           dontuseforce: true
           appdir: blog-user
