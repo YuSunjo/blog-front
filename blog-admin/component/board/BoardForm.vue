@@ -92,7 +92,7 @@ export default {
               Authorization: localStorage.getItem("admin_token"),
             },
           });
-          await this.$router.go()
+          await this.$router.go(0)
         }
       } catch (e) {
         alert("게시글 생성하는데 실패했습니다.")

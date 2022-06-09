@@ -20,6 +20,7 @@
     "axios": "^0.24.0",
     "cookie-universal-nuxt": "^2.1.5",
     "express": "^4.17.3",
+    "google-signin-vue": "^1.2.2",
     "js-cookie": "^3.0.1",
     "nuxt": "^2.15.8",
     "vue": "^2.6.14",

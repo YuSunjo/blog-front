@@ -16,7 +16,7 @@ export const actions = {
     try {
       let response = await this.$axios.get("/api/v1/member", {
         headers: {
-          Authorization: this.$cookies.get("token"),
+          Authorization: localStorage.getItem("token"),
         },
       });
       commit("setMyInfo", response.data.data);
@@ -27,10 +27,10 @@ export const actions = {
   async login({commit}, payload) {
     try {
       let response = await this.$axios.post("/api/v1/member/login", payload);
-      this.$cookies.set("token", response.data.data)
+      localStorage.setItem("token", response.data.data)
       let myResponse = await this.$axios.get("api/v1/member", {
         headers: {
-          Authorization: this.$cookies.get("token"),
+          Authorization: localStorage.getItem("token"),
         },
       });
       commit("setMyInfo", myResponse.data.data);
@@ -47,7 +47,7 @@ export const actions = {
   },
   async logout({commit}) {
     try {
-      this.$cookies.remove("token");
+      localStorage.removeItem("token");
       commit("deleteMyInfo");
       await this.$router.push("/");
     } catch (e) {
@@ -56,15 +56,15 @@ export const actions = {
   },
   async google({commit}, payload) {
     try {
-      const response = await this.$axios.post('auth/google', payload);
-      this.$cookies.set("token", response.data.data)
+      const response = await this.$axios.post('api/v1/auth', payload);
+      localStorage.setItem("token", response.data.data)
       let myResponse = await this.$axios.$get("api/v1/member", {
         headers: {
-          Authorization: this.$cookies.get("token"),
+          Authorization: localStorage.getItem("token"),
         },
       });
       commit("setMyInfo", myResponse.data.data);
-      await this.$router.push('/')
+      await this.$router.go(0);
     } catch (e) {
       alert("로그인 실패")
       console.log(e);

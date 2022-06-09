@@ -16,7 +16,7 @@ export const actions = {
     try {
       let response = await this.$axios.post("/api/v1/comment", payload, {
         headers: {
-          Authorization: this.$cookies.get("token"),
+          Authorization: localStorage.getItem("token"),
         },
       });
       commit("createComment", response.data.data);
@@ -28,7 +28,7 @@ export const actions = {
     try {
       let response = await this.$axios.get(`/api/v1/comment/${payload}`, {
         headers: {
-          Authorization: this.$cookies.get("token"),
+          Authorization: localStorage.getItem("token"),
         }
       });
       commit("retrieveComment", response.data.data)

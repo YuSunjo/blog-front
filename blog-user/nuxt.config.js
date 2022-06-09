@@ -8,6 +8,10 @@ export default {
   head: {
     title: "blog",
     meta: [{ name: "referrer", content: "no-referrer" }],
+    script: [
+      { src: 'https://apis.google.com/js/api.js' },
+      { src: 'https://apis.google.com/js/platform.js' },
+    ]
   },
   router: {
     middleware: ['getMyInfo']

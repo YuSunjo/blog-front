@@ -29,10 +29,23 @@
                   회원가입
                 </v-btn>
               </v-col>
-              <v-col cols="12" xs="12" md="8">
-                <v-btn text target='_self' :href="onClickGoogleLogin()">
-                  <v-img contain :src="require(`@/assets/google/google_login_image.png`)" height="40"></v-img>
-                </v-btn>
+              <v-col cols="12" xs="12" md="4">
+                <googleSignIn
+                    :clientId="'725334726540-v1gdp6m4ocdlrgf8i01f1os43sr46oc8.apps.googleusercontent.com'"
+                    :successCallBack="getSuccessData"
+                    :failureCallBack="getFailureData"
+                    :customButtonId="'googleLoginButton'"
+                    :customButton="true"
+                >
+                  <template>
+                    <a id="googleLoginButton">
+                      <v-img contain :src="require(`@/assets/google/google_login_image.png`)" height="40"></v-img>
+                    </a>
+                  </template>
+                </googleSignIn>
+              </v-col>
+              <v-col cols="12" xs="12" md="4">
+                <v-btn>페이스북 로그인 예정</v-btn>
               </v-col>
             </v-row>
           </v-container>
@@ -43,7 +56,10 @@
 </template>
 
 <script>
+import googleSignIn from 'google-signin-vue/src/googleSignIn.vue'
+
 export default {
+  components: {googleSignIn},
   data() {
     return {
       valid: false,
@@ -81,13 +97,17 @@ export default {
             })
       }
     },
-    onClickGoogleLogin() {
-      return 'https://accounts.google.com/o/oauth2/v2/auth' +
-          `?client_id=${process.env.GOOGLE_API_KEY}` +
-          `&redirect_uri=${process.env.REDIRECT_URI}` +
-          '&response_type=code' +
-          '&scope=openid%20profile%20email'
-    }
+    getSuccessData(user) {
+      this.$store.dispatch('members/google', {
+        email: user.email,
+        name: user.name,
+        accessToken: user.id,
+        provider: 'GOOGLE'
+      })
+    },
+    getFailureData(errorData) {
+      console.log('[GOOGLE] error', errorData)
+    },
   }
 }
 </script>
