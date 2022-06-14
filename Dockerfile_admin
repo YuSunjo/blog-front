@@ -1,0 +1,7 @@
+FROM node:14-slim
+ENV APP_HOME=/usr/blog/app
+WORKDIR $APP_HOME
+COPY ./blog-admin/package.json .
+RUN npm install
+COPY ./blog-admin ./
+RUN npm run build
