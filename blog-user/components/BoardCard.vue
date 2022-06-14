@@ -11,6 +11,9 @@
       <v-card-title>
         {{board.title}}
       </v-card-title>
+      <v-card-text>
+        {{$moment('2021-09-12').fromNow()}}
+      </v-card-text>
       <v-card-actions>
         <v-btn
             color="orange lighten-2"

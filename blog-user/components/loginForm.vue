@@ -31,7 +31,7 @@
               </v-col>
               <v-col cols="12" xs="12" md="4">
                 <googleSignIn
-                    :clientId="'725334726540-v1gdp6m4ocdlrgf8i01f1os43sr46oc8.apps.googleusercontent.com'"
+                    :clientId=this.googleApiKey
                     :successCallBack="getSuccessData"
                     :failureCallBack="getFailureData"
                     :customButtonId="'googleLoginButton'"
@@ -62,6 +62,7 @@ export default {
   components: {googleSignIn},
   data() {
     return {
+      googleApiKey: process.env.GOOGLE_API_KEY,
       valid: false,
       email: '',
       password: '',
