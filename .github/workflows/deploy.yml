@@ -1,0 +1,56 @@
+name: Deploy front
+
+on:
+  push:
+    branches:
+      - master
+      - develop
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 14
+
+      - name: Create .env.development
+        env:
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          RESOURCE_FILE: blog-user/.env.development
+          BASE_URL: https://api-lovga.site
+        run: |
+          echo -e "NODE_ENV = development\nBASE_URL = $BASE_URL\nGOOGLE_API_KEY = $GOOGLE_API_KEY" > $RESOURCE_FILE
+
+      - name: clean build
+        run: cd blog-user | npm run build
+
+      - name: copy file
+        uses: appleboy/scp-action@master
+        with:
+          host: 115.71.238.146
+          username: root
+          password: ${{ secrets.SERVER_PASSWORD }}
+          port: 22
+          source: "blog-user/.nuxt blog-user/package.json"
+          target: "~/blog-front/blog-user"
+
+      - name: ssh
+        uses: appleboy/ssh-action@master
+        with:
+          host: 115.71.238.146
+          username: root
+          password: ${{ secrets.SERVER_PASSWORD }}
+          port: 22
+          script: |
+            cd ~/blog-front/blog-user |
+            npm run start
+
+
+
+
+
+
+
