@@ -25,7 +25,7 @@ jobs:
           echo -e "NODE_ENV = development\nBASE_URL = $BASE_URL\nGOOGLE_API_KEY = $GOOGLE_API_KEY" > $RESOURCE_FILE
 
       - name: clean build
-        run: cd blog-user && yarn build
+        run: cd blog-user && npm install && npm run build
 
       - name: copy file
         uses: appleboy/scp-action@master
