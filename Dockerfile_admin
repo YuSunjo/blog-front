@@ -4,4 +4,5 @@ WORKDIR $APP_HOME
 COPY ./blog-admin/package.json .
 RUN npm install
 COPY ./blog-admin ./
+EXPOSE 3030
 RUN npm run build

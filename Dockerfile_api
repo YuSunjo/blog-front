@@ -4,4 +4,5 @@ WORKDIR $APP_HOME
 COPY ./blog-user/package.json .
 RUN npm install
 COPY ./blog-user ./
+EXPOSE 3000
 RUN npm run build
