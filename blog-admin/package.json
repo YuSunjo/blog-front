@@ -8,6 +8,7 @@
     "dev": "nuxt",
     "lint": "eslint **/*",
     "build": "nuxt build",
+    "build-dev": "nuxt build --dotenv .env.development",
     "generate": "nuxt generate",
     "heroku-postbuild": "npm run build",
     "start": "nuxt start"
