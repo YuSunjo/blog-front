@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-card align-self='center' class='mb-12'>
-      <v-form ref='form' v-model='valid' @submit.prevent='onSubmitCreateBoardForm(board.id)'>
+      <v-form ref='form' v-model='valid' @submit.prevent='onSubmitCreateBoardForm(id)'>
         <v-row class='ma-0' align='center'>
           <v-card-title>블로그 글쓰기</v-card-title>
           <v-spacer></v-spacer>
@@ -42,6 +42,13 @@
             ></v-text-field>
           </v-row>
           <editor v-model="content" :board="content"/>
+          <v-container>
+            <v-chip v-for="(item, i) in board.hashTagList" :key="i">
+              {{item.hashTag}}
+            </v-chip>
+          </v-container>
+          <hashtags :tags="hashTagList">
+          </hashtags>
         </v-container>
         <v-divider></v-divider>
       </v-form>
@@ -51,9 +58,10 @@
 
 <script>
 import Editor from "../board/Editor";
+import Hashtags from "./Hashtags";
 
 export default {
-  components: {Editor},
+  components: {Hashtags, Editor},
   props: {
     board: {
       type: Object,
@@ -64,7 +72,11 @@ export default {
       required: true
     }
   },
+  created() {
+    this.content = this.board !== undefined ? this.board.content : '';
+  },
   mounted() {
+    this.id = this.board !== undefined ? this.board.id : null;
     this.title = this.board !== undefined ? this.board.title : '';
     this.content = this.board !== undefined ? this.board.content : '';
     this.categoryId = this.board !== undefined ? this.board.categoryId : '';
@@ -90,7 +102,8 @@ export default {
             return '선택해주세요.'
           }
         }
-      }
+      },
+      hashTagList: []
     }
   },
   methods: {
@@ -104,7 +117,7 @@ export default {
               title: this.title,
               isPrivate: this.isPrivate,
               boardThumbnailUrl: null,
-              hashTagList: []
+              hashTagList: this.hashTagList.map(hashtag => hashtag.value)
             }, {
               headers: {
                 Authorization: localStorage.getItem("admin_token"),
@@ -119,7 +132,7 @@ export default {
               title: this.title,
               isPrivate: this.isPrivate,
               boardThumbnailUrl: null,
-              hashTagList: []
+              hashTagList: this.hashTagList.map(hashtag => hashtag.value).concat(this.board.hashTagList.map(hashTag => hashTag.hashTag))
             }, {
               headers: {
                 Authorization: localStorage.getItem("admin_token"),
