@@ -1,6 +1,6 @@
 require('dotenv').config({path: `.env.${process.env.NODE_ENV}`})
 
-export default {
+module.exports = {
     eslint: {
         fix: true,
     },
@@ -44,5 +44,4 @@ export default {
             }
         }
     }
-
 }

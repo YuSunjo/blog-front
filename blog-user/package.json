@@ -10,7 +10,8 @@
     "build-dev": "nuxt build --dotenv .env.development",
     "generate": "nuxt generate",
     "heroku-postbuild": "npm run build",
-    "start": "nuxt start"
+    "start": "nuxt start",
+    "start-server": "NODE_ENV=development node server"
   },
   "author": "",
   "license": "ISC",
