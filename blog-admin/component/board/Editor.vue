@@ -41,7 +41,7 @@ export default {
     }
   },
   mounted() {
-    this.content = this.board !== undefined ? this.board : null;
+    this.content = this.board !== undefined ? this.board : '';
   },
   data: () => ({
     // declare extensions you want to use

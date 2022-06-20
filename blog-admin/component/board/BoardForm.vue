@@ -41,7 +41,7 @@
                 :rules='[rules.required]'
             ></v-text-field>
           </v-row>
-          <editor v-model="board.content" :board="board.content"/>
+          <editor v-model="content" :board="content"/>
         </v-container>
         <v-divider></v-divider>
       </v-form>
