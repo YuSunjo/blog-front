@@ -4,7 +4,11 @@
       <v-btn @click="updateToggle">게시글 생성</v-btn>
     </v-container>
     <v-container v-if="createBoardFormToggle">
-      <board-form />
+      <board-form :retrieveCategory="retrieveCategory">
+        <template v-slot:create>
+          생성
+        </template>
+      </board-form>
     </v-container>
     <v-container>
       <div>
