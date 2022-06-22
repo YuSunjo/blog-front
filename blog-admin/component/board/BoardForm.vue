@@ -43,11 +43,11 @@
           </v-row>
           <editor v-model="content" :board="content"/>
           <v-container>
-            <v-chip v-for="(item, i) in board.hashTagList" :key="i">
+            <v-chip v-for="(item, i) in hashTagList" :key="i">
               {{item.hashTag}}
             </v-chip>
           </v-container>
-          <hashtags :tags="hashTagList">
+          <hashtags :tags="newHashTagList">
           </hashtags>
         </v-container>
         <v-divider></v-divider>
@@ -81,6 +81,7 @@ export default {
     this.content = this.board !== undefined ? this.board.content : '';
     this.categoryId = this.board !== undefined ? this.board.categoryId : '';
     this.isPrivate = this.board !== undefined ? this.board.isPrivate : null;
+    this.hashTagList = this.board !== undefined ? this.board.hashTagList : [];
   },
   data() {
     return {
@@ -103,7 +104,8 @@ export default {
           }
         }
       },
-      hashTagList: []
+      hashTagList: [],
+      newHashTagList: []
     }
   },
   methods: {
@@ -117,7 +119,7 @@ export default {
               title: this.title,
               isPrivate: this.isPrivate,
               boardThumbnailUrl: null,
-              hashTagList: this.hashTagList.map(hashtag => hashtag.value)
+              hashTagList: this.newHashTagList.map(hashtag => hashtag.value)
             }, {
               headers: {
                 Authorization: localStorage.getItem("admin_token"),
@@ -132,7 +134,7 @@ export default {
               title: this.title,
               isPrivate: this.isPrivate,
               boardThumbnailUrl: null,
-              hashTagList: this.hashTagList.map(hashtag => hashtag.value).concat(this.board.hashTagList.map(hashTag => hashTag.hashTag))
+              hashTagList: this.newHashTagList.map(hashtag => hashtag.value).concat(this.board.hashTagList.map(hashTag => hashTag.hashTag))
             }, {
               headers: {
                 Authorization: localStorage.getItem("admin_token"),
