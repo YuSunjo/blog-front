@@ -2,6 +2,7 @@
   <div>
     <v-container>
       <v-btn @click="updateToggle">게시글 생성</v-btn>
+      <v-btn @click="onClickCategoryAll">전체</v-btn>
     </v-container>
     <v-container v-if="createBoardFormToggle">
       <board-form :retrieveCategory="retrieveCategory">
@@ -11,29 +12,10 @@
       </board-form>
     </v-container>
     <v-container>
-      <div>
-        <v-chip-group
-            v-model='selected'
-            class='mb-4'
-            active-class='primary--text'
-        >
-          <v-chip key='ALL' large filter value='ALL' @click="onClickCategoryAll" >전체</v-chip>
-          <v-chip v-for='(item,i) in retrieveCategory' :value='item.categoryName' :key='i' large filter
-                  @click="onClickCategory(item.categoryName)">
-            {{ item.categoryName }}
-          </v-chip>
-        </v-chip-group>
-        <v-chip-group
-            v-model='selected'
-            class='mb-4'
-            active-class='primary--text'
-        >
-          <v-chip v-for='(item,i) in hashTagList' :value='item' :key='i' large filter
-                  @click="onClickHashTag(item)">
-            {{ item }}
-          </v-chip>
-        </v-chip-group>
-      </div>
+      <v-select v-model="hashTagList" :items="hashTagListResponse" label="해시태그" @change="onClickHashTag(hashTagList)">
+      </v-select>
+      <v-select v-model="categoryName" :items="retrieveCategory" label="카테고리" @change="onClickCategory(categoryName)">
+      </v-select>
       <div>
         <board-card nuxt :to="`/board/${board.id}`" v-for='(board, i) in boardList' :key='i'
                     :board='board'></board-card>
@@ -54,7 +36,7 @@ import BoardForm from "../../component/board/BoardForm";
 
 export default {
   components: {BoardForm, BoardCard},
-  async asyncData({ query, $axios }) {
+  async asyncData({query, $axios}) {
     query.page = query.page == null ? 1 : query.page;
     query.size = query.size == null ? 5 : query.size;
     query.category = query.category == null ? null : query.category
@@ -77,12 +59,12 @@ export default {
         Authorization: localStorage.getItem("admin_token")
       }
     })
-    console.log(hashTagResponse)
+    console.log(boardResponse)
     return {
       boardList: boardResponse.data.data.boardList,
       boardTotalPage: boardResponse.data.data.totalPage,
-      retrieveCategory: categoryResponse.data.data,
-      hashTagList: hashTagResponse.data.data,
+      retrieveCategory: categoryResponse.data.data.map(category => category.categoryName),
+      hashTagListResponse: hashTagResponse.data.data,
       page: parseInt(query.page),
       size: parseInt(query.size),
       category: query.category,
@@ -91,28 +73,30 @@ export default {
   data() {
     return {
       selected: true,
+      categoryName: this.$route.query.category,
       page: 1,
-      createBoardFormToggle: false
+      createBoardFormToggle: false,
+      hashTagList: this.$route.query.hashTagList,
     };
   },
   methods: {
     onClickCategory(categoryName) {
-      this.$router.push({query: {...this.$router.query, category: categoryName}})
+      this.$router.push({query: {...this.$route.query, category: categoryName}})
     },
     onClickCategoryAll() {
-      this.$router.push({query: {...this.$router.query, category: null, hashTagList: null}})
+      this.$router.push({query: {...this.$route.query, category: null, hashTagList: null}})
     },
     updateToggle() {
       this.createBoardFormToggle = !this.createBoardFormToggle;
     },
     onClickHashTag(hashTag) {
-      this.$router.push({query: {...this.$router.query, hashTagList: hashTag}})
+      this.$router.push({query: {...this.$route.query, hashTagList: hashTag}})
     }
   },
   watch: {
     page(newValue, oldValue) {
       if (oldValue)
-        this.$router.push({ query: { ...this.$route.query, page: newValue } })
+        this.$router.push({query: {...this.$route.query, page: newValue}})
     }
   },
   watchQuery: true
