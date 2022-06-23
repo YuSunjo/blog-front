@@ -12,7 +12,7 @@
       </board-form>
     </v-container>
     <v-container>
-      <v-select v-model="hashTagList" :items="hashTagListResponse" label="해시태그" @change="onClickHashTag(hashTagList)">
+      <v-select v-model="hashTag" :items="hashTagListResponse" label="해시태그" @change="onClickHashTag(hashTag)">
       </v-select>
       <v-select v-model="categoryName" :items="retrieveCategory" label="카테고리" @change="onClickCategory(categoryName)">
       </v-select>
@@ -40,10 +40,10 @@ export default {
     query.page = query.page == null ? 1 : query.page;
     query.size = query.size == null ? 5 : query.size;
     query.category = query.category == null ? null : query.category
-    query.hashTagList = query.hashTagList == null ? null : query.hashTagList
+    query.hashTag = query.hashTag == null ? null : query.hashTag
     let boardResponse = await $axios.get(`/api/v1/board/list?page=${query.page}
     &size=${query.size}${query.category == null ? '' : `&category=${query.category}`}
-    ${query.hashTagList == null ? '' : `&hashTagList=${query.hashTagList}`}
+    ${query.hashTag == null ? '' : `&hashTagList=${query.hashTag}`}
     `, {
       headers: {
         Authorization: localStorage.getItem("admin_token"),
@@ -76,7 +76,7 @@ export default {
       categoryName: this.$route.query.category,
       page: 1,
       createBoardFormToggle: false,
-      hashTagList: this.$route.query.hashTagList,
+      hashTag: this.$route.query.hashTag,
     };
   },
   methods: {
@@ -84,13 +84,13 @@ export default {
       this.$router.push({query: {...this.$route.query, category: categoryName}})
     },
     onClickCategoryAll() {
-      this.$router.push({query: {...this.$route.query, category: null, hashTagList: null}})
+      this.$router.push({query: {...this.$route.query, category: null, hashTag: null}})
     },
     updateToggle() {
       this.createBoardFormToggle = !this.createBoardFormToggle;
     },
     onClickHashTag(hashTag) {
-      this.$router.push({query: {...this.$route.query, hashTagList: hashTag}})
+      this.$router.push({query: {...this.$route.query, hashTag: hashTag}})
     }
   },
   watch: {

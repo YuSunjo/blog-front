@@ -11,7 +11,8 @@
     "build-dev": "nuxt build --dotenv .env.development",
     "generate": "nuxt generate",
     "heroku-postbuild": "npm run build",
-    "start": "nuxt start"
+    "start": "nuxt start",
+    "start-server": "NODE_ENV=development node server"
   },
   "author": "",
   "license": "ISC",
@@ -22,6 +23,7 @@
     "@nuxtjs/vuetify": "^1.12.3",
     "axios": "^0.24.0",
     "cookie-universal-nuxt": "^2.1.5",
+    "express": "^4.18.1",
     "js-cookie": "^3.0.1",
     "nuxt": "^2.15.8",
     "tiptap-vuetify": "^2.24.0",
