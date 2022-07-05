@@ -11,6 +11,10 @@
                 @click="onClickCategory(item.categoryName)">
           {{ item.categoryName }}
         </v-chip>
+        <v-chip v-for='(item,i) in retrieveHashTag' :value='item' :key='i' large filter
+                @click="onClickHashTag(item)">
+          {{ item }}
+        </v-chip>
       </v-chip-group>
     </div>
     <v-row>
@@ -40,11 +44,14 @@ export default {
     query.page = query.page == null ? 1 : query.page;
     query.size = query.size == null ? 8 : query.size;
     query.category = query.category == null ? null : query.category
+    query.hash
     await store.dispatch('category/retrieveCategory')
+    await store.dispatch('boards/retrieveHashTag')
     return await store.dispatch('boards/retrieveBoard', {
       page: query.page,
       size: query.size,
-      category: query.category
+      category: query.category,
+      hashTag: query.hashTag,
     });
   },
   computed: {
@@ -56,6 +63,9 @@ export default {
     },
     retrieveCategory() {
       return this.$store.state.category.categoryList;
+    },
+    retrieveHashTag() {
+      return this.$store.state.boards.hashTagList;
     }
   },
   data() {
@@ -76,6 +86,13 @@ export default {
       await this.$store.dispatch('boards/retrieveBoard', {
         page: 1,
         size: 5
+      })
+    },
+    async onClickHashTag(hashTag) {
+      await this.$store.dispatch('boards/retrieveBoard', {
+        page: 1,
+        size: 5,
+        hashTag: hashTag,
       })
     }
   }

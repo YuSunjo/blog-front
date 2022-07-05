@@ -2,7 +2,11 @@
   <v-container>
     <v-card>
       <v-container>
-        <v-img />
+        <v-img
+            max-width="200"
+            max-height="200"
+            :src="board.boardThumbnailUrl"
+        />
         <v-card-title v-if="board.title.length < 10">
           {{board.title}}
         </v-card-title>

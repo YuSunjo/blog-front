@@ -12,7 +12,7 @@
         {{board.title}}
       </v-card-title>
       <v-card-text>
-        {{$moment('2021-09-12').fromNow()}}
+        {{$moment(board.createdDate).fromNow()}}
       </v-card-text>
       <v-card-actions>
         <v-btn

@@ -49,6 +49,20 @@
           </v-container>
           <hashtags :tags="newHashTagList">
           </hashtags>
+          <v-row class='ma-0' align='center'>
+            <v-file-input
+                label="이미지 업로드"
+                outlined
+                dense
+                v-model="file"
+                @change="selectFile"
+            />
+          </v-row>
+          <v-img
+              max-width="200"
+              max-height="200"
+              :src="this.boardThumbnailUrl"
+          />
         </v-container>
         <v-divider></v-divider>
       </v-form>
@@ -82,6 +96,7 @@ export default {
     this.categoryId = this.board !== undefined ? this.board.categoryId : '';
     this.isPrivate = this.board !== undefined ? this.board.isPrivate : null;
     this.hashTagList = this.board !== undefined ? this.board.hashTagList : [];
+    this.boardThumbnailUrl = this.board !== undefined ? this.board.boardThumbnailUrl : null;
   },
   data() {
     return {
@@ -92,6 +107,8 @@ export default {
       content: '',
       categoryId: '',
       isPrivate: null,
+      boardThumbnailUrl: '',
+      file: null,
       isPrivateList: [
         {content: "공개안함", value: true},
         {content: "공개함", value: false}
@@ -113,13 +130,15 @@ export default {
       try {
         if (this.$refs.form.validate()) {
           if (id == null) {
+            console.log("categoryId", this.categoryId)
+            console.log("sdf", this.isPrivate)
             await this.$axios.$post('api/v1/board', {
               categoryId: this.categoryId,
               content: this.content,
               title: this.title,
               isPrivate: this.isPrivate,
-              boardThumbnailUrl: null,
-              hashTagList: this.newHashTagList.map(hashtag => hashtag.value)
+              boardThumbnailUrl: this.boardThumbnailUrl,
+              hashTagList: this.newHashTagList.map(hashtag => hashtag.value),
             }, {
               headers: {
                 Authorization: localStorage.getItem("admin_token"),
@@ -133,7 +152,7 @@ export default {
               content: this.content,
               title: this.title,
               isPrivate: this.isPrivate,
-              boardThumbnailUrl: null,
+              boardThumbnailUrl: this.boardThumbnailUrl,
               hashTagList: this.newHashTagList.map(hashtag => hashtag.value).concat(this.board.hashTagList.map(hashTag => hashTag.hashTag))
             }, {
               headers: {
@@ -146,6 +165,22 @@ export default {
         }
       } catch (e) {
         alert("게시글 생성하는데 실패했습니다.")
+      }
+    },
+    async selectFile(file) {
+      this.file = file;
+      const imageFormData = new FormData();
+      imageFormData.append('upload', this.file)
+      try {
+        let response = await this.$axios.$post(`/image/upload?imageType=BOARD_THUMBNAIL`, imageFormData, {
+          headers: {
+            'ContentType': 'multipart/form-data'
+          }
+        });
+        this.boardThumbnailUrl = response.data
+        alert("업로드 성공하였습니다.")
+      } catch (e) {
+        alert("이미지 업로드하는데 실패했습니다.");
       }
     }
   }

@@ -5,7 +5,7 @@
       <v-btn @click="onClickCategoryAll">전체</v-btn>
     </v-container>
     <v-container v-if="createBoardFormToggle">
-      <board-form :retrieveCategory="retrieveCategory">
+      <board-form :retrieveCategory="retrieveCategoryWithId">
         <template v-slot:create>
           생성
         </template>
@@ -43,7 +43,7 @@ export default {
     query.hashTag = query.hashTag == null ? null : query.hashTag
     let boardResponse = await $axios.get(`/api/v1/board/list?page=${query.page}
     &size=${query.size}${query.category == null ? '' : `&category=${query.category}`}
-    ${query.hashTag == null ? '' : `&hashTagList=${query.hashTag}`}
+    ${query.hashTag == null ? '' : `&hashTag=${query.hashTag}`}
     `, {
       headers: {
         Authorization: localStorage.getItem("admin_token"),
@@ -59,10 +59,10 @@ export default {
         Authorization: localStorage.getItem("admin_token")
       }
     })
-    console.log(boardResponse)
     return {
       boardList: boardResponse.data.data.boardList,
       boardTotalPage: boardResponse.data.data.totalPage,
+      retrieveCategoryWithId: categoryResponse.data.data,
       retrieveCategory: categoryResponse.data.data.map(category => category.categoryName),
       hashTagListResponse: hashTagResponse.data.data,
       page: parseInt(query.page),
