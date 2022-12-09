@@ -1,33 +1,33 @@
-name: CI
-
-on:
-  push:
-    branches: [ master ]
-  workflow_dispatch:
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Prepare
-        uses: actions/checkout@v2
-      - name: Deploy_ADMIN
-        uses: AkhileshNS/heroku-deploy@v3.12.12
-        with:
-          heroku_api_key: ${{Secrets.HEROKU_API_KEY}}
-          heroku_email: ${{Secrets.HEROKU_EMAIL}}
-          heroku_app_name: ${{Secrets.HEROKU_APP_NAME_ADMIN}}
-          branch: develop
-          dontuseforce: true
-          appdir: blog-admin
-
-      - name: Deploy_USER
-        uses: AkhileshNS/heroku-deploy@v3.12.12
-        with:
-          heroku_api_key: ${{Secrets.HEROKU_API_KEY}}
-          heroku_email: ${{Secrets.HEROKU_EMAIL}}
-          heroku_app_name: ${{Secrets.HEROKU_APP_NAME_USER}}
-          branch: develop
-          dontuseforce: true
-          appdir: blog-user
+#name: CI
+#
+#on:
+#  push:
+#    branches: [ master ]
+#  workflow_dispatch:
+#
+#jobs:
+#  build:
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - name: Prepare
+#        uses: actions/checkout@v2
+#      - name: Deploy_ADMIN
+#        uses: AkhileshNS/heroku-deploy@v3.12.12
+#        with:
+#          heroku_api_key: ${{Secrets.HEROKU_API_KEY}}
+#          heroku_email: ${{Secrets.HEROKU_EMAIL}}
+#          heroku_app_name: ${{Secrets.HEROKU_APP_NAME_ADMIN}}
+#          branch: develop
+#          dontuseforce: true
+#          appdir: blog-admin
+#
+#      - name: Deploy_USER
+#        uses: AkhileshNS/heroku-deploy@v3.12.12
+#        with:
+#          heroku_api_key: ${{Secrets.HEROKU_API_KEY}}
+#          heroku_email: ${{Secrets.HEROKU_EMAIL}}
+#          heroku_app_name: ${{Secrets.HEROKU_APP_NAME_USER}}
+#          branch: develop
+#          dontuseforce: true
+#          appdir: blog-user
